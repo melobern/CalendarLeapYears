@@ -35,8 +35,10 @@ Calendar::~Calendar() {
 }
 
 bool Calendar::isLeap(const int year) {
-  if (year == 0)
+  if (year == 0) {
+    std::cerr << RED "Error: year 0 doesn't exist." RESET << std::endl;
     return (false);
+  }
 
   int abs_year = std::abs(year);
 
@@ -68,47 +70,29 @@ void Calendar::add_days_to_date(int mm, int dd, int yy, int daysLeftToAdd) {
   std::cout << "The new date is " << dd << " " << mm << " " << yy << std::endl;
 }
 
-int         Calendar::dateToInt(const std::string date) {
-  char dash;
-  std::istringstream iss(date);
-  int year, month, day;
-  int result;
-
-  iss >> year >> dash >> month >> dash >> day;
-  result = (year * 10000) + (month * 100) + day;
-  return (result);
-}
-
-std::string Calendar::findClosestDate(const std::string date,
-                                      const std::map<std::string, float> map) {
-  std::string closestDate;
-  int closestDateDiff = INT_MAX;
-  int dateToInt = this->dateToInt(date);
-  int dateDiff;
-
-  for (std::map<std::string, float>::const_iterator it = map.begin();
-       it != map.end(); ++it) {
-    dateDiff = dateToInt - this->dateToInt(it->first);
-    if (dateDiff < closestDateDiff && dateDiff > 0) {
-      closestDateDiff = dateDiff;
-      closestDate = it->first;
-    }
-    if (dateDiff < 0)
-        break;
-  }
-  return (closestDate);
-}
-
 bool Calendar::dateIsWrong(const int dd, const int mm, const int yy) {
-  if (yy == 0 || mm <= 0 || mm > 12 || dd <= 0 || dd > 31)
-    return (true);
-  if (mm != 2 && mm > 0 && mm < 13 && dd > this->_daysInMonth[mm])
-    return (true);
-  if (mm == 2 && dd > 28 && !isLeap(yy))
-    return (true);
-  if (mm == 2 && dd > 29)
-    return (true);
-  return (false);
+  if (yy == 0) {
+    std::cerr << RED "Error: year 0 doesn't exist." RESET << std::endl;
+  } else if (dd <= 0 || dd > 31) {
+    std::cerr << RED "Day must be between 0 and 31. You gave : " << dd;
+    std::cerr <<  RESET << std::endl;
+  } else if (mm <= 0 || mm > 12) {
+    std::cerr << RED "Month must be between 0 and 12. You gave : " << mm;
+    std::cerr << "You gave :" << mm << RESET << std::endl;
+    std::cerr << RESET << std::endl;
+  } else if (mm != 2 && mm > 0 && mm < 13 && dd > this->_daysInMonth[mm]) {
+    std::cerr << RED "Error: this month contains only 30 days. ";
+    std::cerr << "You gave :" << dd << RESET << std::endl;
+  } else if (mm == 2 && dd > 28 && !isLeap(yy)) {
+    std::cerr << RED "Error: February contains only 28 days on non-leap years.";
+    std::cerr << "You gave " << dd << RESET << std::endl;
+  } else if (mm == 2 && dd > 29) {
+    std::cerr << RED "Error: February contains only 29 days on leap years.";
+    std::cerr << "You gave " << dd << RESET << std::endl;
+  } else {
+    return (false);
+  }
+  return (true);
 }
 
 void Calendar::printLeapYears(const int min, const int max) {
