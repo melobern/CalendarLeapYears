@@ -2,20 +2,20 @@
 ### A terminal calendar to search leap years or to calcul a future date ! ⌚
 
 #### USAGE
-- Check if a year is leap :
+- **Check if a year is leap :**
 
 Usage : ```./cal [year]```
 
 ⭐ "Oh, I wonder if this year is leap. Let's do ```./cal 2024``` !" ⭐
 
-- Print every leap year between two date :
+- **Print every leap year between two date :**
 
 Usage : ```./cal [min year] [max year]```
 
 
 ⭐ "How many leap years from 1800 to 2024 ?. Let's do ```./cal 1800 2024``` !" ⭐
 
-- Add an amount of days to a date to know the future date :
+- **Add an amount of days to a date to know the future date :**
 
 Usage : ```./cal [day] [month] [year] [days to add]```
 
@@ -29,9 +29,9 @@ Terminal only ⚠️
 
 1 : Git clone the repo.
 
-2 : Go into the repo :
+2 : Go into the repo named **CalendarLeapYears** :
 ```shell
-cd repo
+cd CalendarLeapYears
 ```
 3 : Install with make :
 ```
