@@ -6,7 +6,7 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:29:57 by mbernard          #+#    #+#             */
-/*   Updated: 2024/10/09 22:06:47 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/14 13:18:38 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void askIfIsLeapYear(char **av) {
 
   if (calendar.isLeap(year) && year != 0)
     std::cout << GREEN << year << " is a leap year." << RESET << std::endl;
-  else
+  else if (year != 0)
     std::cout << RED << year << " is not a leap year." << RESET << std::endl;
 }
 
