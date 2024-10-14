@@ -6,7 +6,7 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:07:06 by mbernard          #+#    #+#             */
-/*   Updated: 2024/10/14 13:12:40 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:14:44 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,16 @@ bool Calendar::isLeap(const int year) {
     return (false);
   }
 
+  if (year < -46)
+    return (false);
+
   int abs_year = std::abs(year);
 
-  if (((abs_year % 4 == 0) && (abs_year % 100 != 0)) || (abs_year % 400 == 0)) {
-    return (true);
+  if (abs_year % 4 == 0) {
+    if (year < 1582 || abs_year % 100 != 0 || abs_year % 400 == 0)
+      return (true);
   }
+
   return (false);
 }
 
@@ -96,15 +101,22 @@ bool Calendar::dateIsWrong(const int dd, const int mm, const int yy) {
 }
 
 void Calendar::printLeapYears(const int min, const int max) {
-    int yearFounds = 0;
+    if (min < -44 && max < -44)
+      return;
 
-    for (int x = min; x <= max; x++) {
+    int yearFounds = 0;
+    int x = min;
+
+    if (min < -44 && max > -44)
+      x = -44;
+    while (x <= max) {
       if (x != 0 && isLeap(x)) {
         yearFounds++;
         std::cout << x << "\t";
         if (yearFounds % 11 == 0)
           std::cout << std::endl;
         }
+      x++;
     }
     std::cout << CYAN "Leap years found : " RESET;
     std::cout << YELLOW << yearFounds << RESET << std::endl;

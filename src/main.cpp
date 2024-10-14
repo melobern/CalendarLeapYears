@@ -6,7 +6,7 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 09:29:57 by mbernard          #+#    #+#             */
-/*   Updated: 2024/10/14 13:18:38 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:15:15 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ static void printLeapYears(char **av) {
   Calendar calendar;
   int minYY = std::atoi(av[1]);
   int maxYY = std::atoi(av[2]);
+
+  if (av[1][0] == '-' && minYY >= 0)
+    minYY = -46;
+  if (av[2][0] == '-' && maxYY >= 0)
+    maxYY = -46;
+  if ((av[1][0] != '-' && minYY != std::atol(av[1]))
+     || (av[2][0] != '-' &&  maxYY != std::atol(av[2]))) {
+    std::cerr << RED << "Error : overflow detected" << RESET << std::endl;
+    return;
+  }
 
   if (minYY > maxYY)
     std::swap(maxYY, minYY);
