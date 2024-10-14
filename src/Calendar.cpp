@@ -6,7 +6,7 @@
 /*   By: mbernard <mbernard@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:07:06 by mbernard          #+#    #+#             */
-/*   Updated: 2024/10/09 20:53:23 by mbernard         ###   ########.fr       */
+/*   Updated: 2024/10/14 13:12:40 by mbernard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,14 @@ void Calendar::printLeapYears(const int min, const int max) {
     int yearFounds = 0;
 
     for (int x = min; x <= max; x++) {
-      if (isLeap(x)) {
+      if (x != 0 && isLeap(x)) {
         yearFounds++;
         std::cout << x << "\t";
         if (yearFounds % 11 == 0)
           std::cout << std::endl;
         }
     }
-    std::cout << std::endl;
+    std::cout << CYAN "Leap years found : " RESET;
+    std::cout << YELLOW << yearFounds << RESET << std::endl;
 }
 
