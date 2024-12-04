@@ -27,8 +27,10 @@ Linux only 🐧
 ### Installation
 Terminal only ⚠️
 
-1 : Git clone the repo.
-
+1 : Git clone the repo :
+```shell
+git clone git@github.com:melobern/CalendarLeapYears.git
+```
 2 : Go into the repo named **CalendarLeapYears** :
 ```shell
 cd CalendarLeapYears
